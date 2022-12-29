@@ -1,8 +1,16 @@
 import { HardhatUserConfig, task } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
+import "dotenv/config";
 
 const config: HardhatUserConfig = {
   solidity: "0.8.17",
+  networks: {
+    goerli: {
+      // This value will be replaced on runtime
+      url: process.env.STAGING_QUICKNODE_KEY,
+      accounts: [process.env.PRIVATE_KEY],
+    },
+  },
 };
 
 // This is a sample Hardhat task. To learn how to create your own go to
