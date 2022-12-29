@@ -8,6 +8,7 @@ const config: HardhatUserConfig = {
     goerli: {
       // This value will be replaced on runtime
       url: process.env.STAGING_QUICKNODE_KEY,
+      //@ts-ignore
       accounts: [process.env.PRIVATE_KEY],
     },
   },
