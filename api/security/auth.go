@@ -22,10 +22,10 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	u := models.User{}
-
-	u.Username = input.Username
-	u.Password = input.Password
+	u := models.User{
+		Username: input.Username,
+		Password: input.Password,
+	}
 
 	token, err := LoginCheck(u.Username, u.Password)
 

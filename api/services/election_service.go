@@ -26,13 +26,14 @@ func CreateElection (c *gin.Context) {
 		return
 	}
 
-	e := models.Election{}
-	e.Name = input.Name
-	e.Description = input.Description
-	e.StartDate = input.StartDate
-	e.EndDate = input.EndDate
-	e.Status = enums.PENDING
-	e.CreatedByID = creatorId
+	e := models.Election{
+		Name: input.Name,
+		Description: input.Description,
+		StartDate: input.StartDate,
+		EndDate: input.EndDate,
+		Status: enums.PENDING,
+		CreatedByID: creatorId,
+	}
 	
 	saved,err := repositories.SaveElection(&e)
 

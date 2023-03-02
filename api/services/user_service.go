@@ -20,10 +20,10 @@ func Register(c *gin.Context) {
 		return
 	}
 
-	u := models.User{}
-
-	u.Username = input.Username
-	u.Password = input.Password
+	u := models.User{
+		Username: input.Username,
+		Password: input.Password,
+	}
 
 	_, err := repositories.SaveUser(&u)
 
