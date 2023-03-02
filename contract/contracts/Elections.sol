@@ -28,6 +28,7 @@ contract Elections {
         ElectionStatus status;
         string[] candidateIds;
         string id;
+        address owner;
     }
 
     // Mapping from election ids to elections
@@ -43,12 +44,16 @@ contract Elections {
             name: name,
             status: ElectionStatus.NOT_STARTED,
             id: id,
-            candidateIds: new string[](0)
+            candidateIds: new string[](0),
+            owner: msg.sender
         });
     }
 
     // Add a candidate to an election
     function addCandidate(string memory name,string memory id,string memory electionId) public {
+    
+        require(msg.sender == elections[electionId].owner, "Only the owner can add candidates");
+
         // Ensure that the candidate does not already exist
         require(candidates[id].voteCount == 0, "Candidate already exists");
 
@@ -83,6 +88,7 @@ contract Elections {
 
     // Finish an election
     function finishElection(string memory id) public {
+        require(msg.sender == elections[id].owner, "Only the owner can finish the election");
         // Ensure that the election is in progress
         Election storage election = elections[id];
         require(
@@ -136,6 +142,7 @@ contract Elections {
     }
 
     function startElection(string memory id) public {
+        require(msg.sender == elections[id].owner, "Only the owner can start the election");
         // Ensure that the election is not in progress
         Election storage election = elections[id];
         require(
