@@ -3,8 +3,8 @@ services:
   db:
     image: postgres
     environment:
-        - POSTGRES_USER=test
-        - POSTGRES_PASSWORD=test
+        - POSTGRES_USER=chain-vote
+        - POSTGRES_PASSWORD=chain-vote
         - POSTGRES_DB=chain-vote-db
     ports:
         - "5432:5432"
@@ -12,6 +12,8 @@ services:
     image: chain-vote-api
     environment:
       - GIN_MODE=release
+      - DATABASE_URL="postgresql://chain-vote:chain-vote@localhost:5432/chain-vote-db"
+      - PORT="8080"
     ports:
       - "8080:8080"
     depends_on:
